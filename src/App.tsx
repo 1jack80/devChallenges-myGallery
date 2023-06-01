@@ -7,7 +7,7 @@ const cardInfo = [
 ];
 function App() {
   return (
-    <div className="container">
+    <div className="container max-w-3xl mx-auto">
       <header className="mt-8">
         <figure className="">
           <img
