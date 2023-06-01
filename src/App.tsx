@@ -11,7 +11,7 @@ function App() {
       <header className="mt-8">
         <figure className="">
           <img
-            src="src/assets/profilePhoto.png"
+            src="./profilePhoto.png"
             alt="Rodney Cotton"
             className="rounded-3xl w-28 mx-auto "
           />
