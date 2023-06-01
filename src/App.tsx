@@ -35,32 +35,32 @@ function App() {
 
       <section className="grid grid-cols-3 gap-3 mt-16">
         <img
-          src="src/assets/photo1.png"
+          src="./photo1.png"
           alt="img1 "
           className=" rounded-2xl col-span-1 w-max"
         />
         <img
-          src="src/assets/photo2.png"
+          src="./photo2.png"
           alt="img2 "
           className=" rounded-2xl col-span-2 w-full h-full"
         />
         <img
-          src="src/assets/photo3.png"
+          src="./photo3.png"
           alt="img3 "
           className=" rounded-2xl col-span-2 h-full"
         />
         <img
-          src="src/assets/photo_4.png"
+          src="./photo_4.png"
           alt="img4 "
           className=" rounded-2xl row-span-2 h-full"
         />
         <img
-          src="src/assets/photo5.png"
+          src="./photo5.png"
           alt="img5 "
           className=" rounded-2xl row-start-3 col-start-1 h-full"
         />
         <img
-          src="src/assets/photo6.png"
+          src="./photo6.png"
           alt="img6 "
           className=" rounded-2xl h-full w-full"
         />
@@ -78,7 +78,7 @@ export default App;
 
 const Card = ({ value, unit }: { value: string | number; unit: string }) => {
   return (
-    <div className="flex-1 py-2 text-sm rounded-2xl bg-neutral-200 ">
+    <div className="flex-1 py-3 px-3 text-sm rounded-2xl bg-neutral-200 ">
       <p className="font-medium text-neutral-800">{value}</p>
       <p className="text-neutral-400 capitalize">{unit}</p>
     </div>
