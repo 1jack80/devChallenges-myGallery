@@ -1,10 +1,15 @@
+import { useQueries, useQuery } from "@tanstack/react-query";
 import "./App.css";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import React, { useId } from "react";
 
 const cardInfo = [
   { value: 100, unit: "Posts" },
   { value: "2,242", unit: "Followers" },
   { value: "1,432", unit: "following" },
 ];
+
 function App() {
   return (
     <div className="container max-w-3xl mx-auto">
@@ -25,6 +30,7 @@ function App() {
           {cardInfo.map(({ value, unit }) => {
             return (
               <Card
+                key={value + unit}
                 value={value}
                 unit={unit}
               />
@@ -34,36 +40,21 @@ function App() {
       </header>
 
       <section className="grid grid-cols-3 gap-3 mt-16">
-        <img
-          src="./photo1.png"
-          alt="img1 "
-          className=" rounded-2xl col-span-1 w-max"
+        <Image imageUrl="./photo1.png" />
+        <Image
+          imageUrl="./photo2.png"
+          className="col-span-2"
         />
-        <img
-          src="./photo2.png"
-          alt="img2 "
-          className=" rounded-2xl col-span-2 w-full h-full"
+        <Image
+          imageUrl="./photo3.png"
+          className="col-span-2"
         />
-        <img
-          src="./photo3.png"
-          alt="img3 "
-          className=" rounded-2xl col-span-2 h-full"
+        <Image
+          imageUrl="./photo_4.png"
+          className="row-span-2"
         />
-        <img
-          src="./photo_4.png"
-          alt="img4 "
-          className=" rounded-2xl row-span-2 h-full"
-        />
-        <img
-          src="./photo5.png"
-          alt="img5 "
-          className=" rounded-2xl row-start-3 col-start-1 h-full"
-        />
-        <img
-          src="./photo6.png"
-          alt="img6 "
-          className=" rounded-2xl h-full w-full"
-        />
+        <Image imageUrl="./photo5.png" />
+        <Image imageUrl="./photo6.png" />
       </section>
 
       <footer className="mt-24 text-gray-400 font-semibold">
@@ -79,8 +70,32 @@ export default App;
 const Card = ({ value, unit }: { value: string | number; unit: string }) => {
   return (
     <div className="flex-1 py-3 px-3 text-sm rounded-2xl bg-neutral-200 ">
-      <p className="font-medium text-neutral-800">{value}</p>
+      <p className="font-semibold text-neutral-600">{value}</p>
       <p className="text-neutral-400 capitalize">{unit}</p>
+    </div>
+  );
+};
+
+const Image = ({ imageUrl, className }: { imageUrl: string; className?: string }) => {
+  const { isLoading, data } = useQuery({
+    queryKey: [imageUrl],
+    queryFn: () =>
+      fetch(imageUrl)
+        .then((res) => res.blob())
+        .then((blob) => URL.createObjectURL(blob))
+        .catch((error) => error),
+  });
+  return (
+    <div className={"rounded-2xl overflow-hidden " + className}>
+      {isLoading ? (
+        <Skeleton className="w-full min-h-[220px] h-full" />
+      ) : (
+        <img
+          src={data}
+          alt="img1"
+          className="w-full h-full"
+        />
+      )}
     </div>
   );
 };
